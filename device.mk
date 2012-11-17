@@ -26,7 +26,8 @@ PRODUCT_COPY_FILES := \
     device/samsung/manta/init.manta.usb.rc:root/init.manta.usb.rc \
     device/samsung/manta/init.recovery.manta.rc:root/init.recovery.manta.rc \
     device/samsung/manta/fstab.manta:root/fstab.manta \
-    device/samsung/manta/ueventd.manta.rc:root/ueventd.manta.rc
+    device/samsung/manta/ueventd.manta.rc:root/ueventd.manta.rc \
+    device/samsung/manta/watchdogd:recovery/root/sbin/watchdogd
 
 # Input device files for manta
 PRODUCT_COPY_FILES += \
@@ -179,7 +180,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.hwui.disable_scissor_opt=true
 
 # setup dalvik vm configs.
-$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+#$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
 # Enable AAC 5.1 output
 PRODUCT_PROPERTY_OVERRIDES += \
