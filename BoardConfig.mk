@@ -32,6 +32,10 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a15
 
+# Define kernel config for inline building
+#TARGET_KERNEL_CONFIG := manta_defconfig
+#TARGET_KERNEL_SOURCE := kernel/samsung/manta
+
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
@@ -79,6 +83,16 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_manta
 TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/manta
+
+#TWRP
+TARGET_PREBUILT_KERNEL := device/samsung/manta/kernel
+TARGET_RECOVERY_UI_LIB := librecovery_ui_manta
+TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_manta
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+DEVICE_RESOLUTION := 2560x1600
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
+RECOVERY_SDCARD_ON_DATA := true
+TW_CUSTOM_BATTERY_PATH := /
 
 BOARD_SEPOLICY_DIRS += \
 	device/samsung/manta/sepolicy
