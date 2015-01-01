@@ -114,6 +114,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     device/samsung/manta/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf
 
+# Omni Power profile
+PRODUCT_COPY_FILES += \
+    device/samsung/manta/power_profiles.xml:system/etc/power_profiles.xml
+
 PRODUCT_PACKAGES += \
     lights.manta \
     sensors.manta

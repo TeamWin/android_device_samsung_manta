@@ -44,6 +44,11 @@
 #define LOW_POWER_MAX_FREQ "800000"
 #define NORMAL_MAX_FREQ "1700000"
 
+// we can handle those tags
+#define PROFILE_MAX_CPU_FREQ_TAG "maxFreq"
+#define PROFILE_MAX_TAG "max"
+#define PROFILE_SEPARATOR ":"
+
 struct manta_power_module {
     struct power_module base;
     pthread_mutex_t lock;
@@ -111,6 +116,36 @@ static void init_touchscreen_power_path(struct manta_power_module *manta)
     ALOGE("Error failed to find input dir in %s\n", dir);
 done:
     closedir(d);
+}
+
+static void apply_profile(char* profile, struct manta_power_module *manta)
+{
+    char *token;
+    char *separator = PROFILE_SEPARATOR;
+    char max_freq_profile[80];
+
+    token = strtok(profile, separator);
+    while(token != NULL) {
+#ifdef DEBUG
+        ALOGI("token %s", token);
+#endif
+        if (!strcmp(token, PROFILE_MAX_CPU_FREQ_TAG)) {
+            token = strtok(NULL, separator);
+            strcpy(max_freq_profile, token);
+        }
+        token = strtok(NULL, separator);
+    }
+
+#ifdef DEBUG
+    ALOGI("max_freq_profile %s", max_freq_profile);
+#endif
+
+    // the API will ignore invalid values so we dont need to check it here
+    if (strlen(max_freq_profile) != 0) {
+        pthread_mutex_lock(&manta->lock);
+        sysfs_write(CPU_MAX_FREQ_PATH, max_freq_profile);
+        pthread_mutex_unlock(&manta->lock);
+    }
 }
 
 static void power_init(struct power_module *module)
@@ -249,15 +284,27 @@ static void manta_power_hint(struct power_module *module, power_hint_t hint,
         }
         pthread_mutex_unlock(&manta->lock);
         break;
-
+        case POWER_HINT_POWER_PROFILE:
+#ifdef DEBUG
+            ALOGI("POWER_HINT_POWER_PROFILE %s", (char*)data);
+#endif
+            // profile is contributed as string with key value
+            // pairs separated with ":"
+            apply_profile((char*)data, manta);
+            break;
     case POWER_HINT_LOW_POWER:
-        pthread_mutex_lock(&manta->lock);
+/*        pthread_mutex_lock(&manta->lock);
         if (data)
             sysfs_write(CPU_MAX_FREQ_PATH, LOW_POWER_MAX_FREQ);
         else
             sysfs_write(CPU_MAX_FREQ_PATH, NORMAL_MAX_FREQ);
         low_power_mode = data;
-        pthread_mutex_unlock(&manta->lock);
+        pthread_mutex_unlock(&manta->lock); */
+#ifdef DEBUG
+            // handled by power profiles!
+            ALOGI("POWER_HINT_LOW_POWER");
+#endif
+
         break;
     default:
             break;
