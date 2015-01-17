@@ -17,4 +17,12 @@
 
 <resources>
     <bool name="config_status_bar_scrim_behind_use_src">false</bool>
+
+    <!-- Doze: does this device support STATE_DOZE and STATE_DOZE_SUSPEND?  -->
+    <bool name="doze_display_state_supported">true</bool>
+    <bool name="doze_pulse_on_pick_up">true</bool>
+
+    <!-- Doze: shake accelerometer threshold -->
+<!--    <integer name="doze_shake_accelerometer_threshold">10</integer>-->
+
 </resources>
