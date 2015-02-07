@@ -31,6 +31,10 @@ PRODUCT_PACKAGES += \
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+
+# must be before including omni part
+TARGET_BOOTANIMATION_SIZE := 720x480
+
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/omni/config/common_tablet.mk)
 # Inherit from hardware-specific part of the product configuration
