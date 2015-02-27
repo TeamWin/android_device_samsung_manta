@@ -189,6 +189,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
+# set SELinux property value
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.selinux=1
+
 # for off charging mode
 PRODUCT_PACKAGES += \
     charger_res_images
