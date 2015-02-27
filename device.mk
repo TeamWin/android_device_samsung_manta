@@ -193,6 +193,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.enable_boot_charger_mode=1
 
+# set SELinux property value
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.selinux=1
+
 # for off charging mode
 PRODUCT_PACKAGES += \
     charger_res_images
