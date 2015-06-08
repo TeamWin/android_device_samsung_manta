@@ -1,0 +1,9 @@
+on init
+    start watchdogd
+
+    symlink /sys/devices/platform/s3c2440-i2c.2/i2c-2/2-0006/power_supply/smb347-battery/status /status
+    symlink /sys/devices/w1_bus_master1/32-0008418a386a/ds2784-fuelgauge/power_supply/ds2784-fuelgauge/capacity /capacity
+
+# Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
+service watchdogd /sbin/watchdogd 10 20
+    class core
