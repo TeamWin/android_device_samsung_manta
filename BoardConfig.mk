@@ -34,8 +34,8 @@ TARGET_CPU_VARIANT := cortex-a15
 
 # Define kernel config for inline building
 #TARGET_KERNEL_CONFIG := manta_defconfig
-TARGET_KERNEL_CONFIG := omni_manta_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/manta
+#TARGET_KERNEL_CONFIG := omni_manta_defconfig
+#TARGET_KERNEL_SOURCE := kernel/samsung/manta
 
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -58,6 +58,7 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 TARGET_RECOVERY_FSTAB = device/samsung/manta/fstab.manta
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 685768704
 # Disable journaling on system.img to save space.
 BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
@@ -91,13 +92,12 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/manta
 TARGET_PREBUILT_KERNEL := device/samsung/manta/kernel
 #TARGET_RECOVERY_UI_LIB := librecovery_ui_manta
 TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_manta
-TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TW_THEME := landscape_hdpi
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 RECOVERY_SDCARD_ON_DATA := true
 TW_CUSTOM_BATTERY_PATH := /
 TW_INCLUDE_CRYPTO := true
 TW_NO_CPU_TEMP := true
+TARGET_RECOVERY_PIXEL_FORMAT := "ABGR_8888"
 
 BOARD_SEPOLICY_DIRS += \
 	device/samsung/manta/sepolicy
